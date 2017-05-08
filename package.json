@@ -1,0 +1,33 @@
+{
+  "name": "hapi-jwt-plugin",
+  "version": "1.0.0",
+  "description": "Hapi Plugin to enable JWT authorization",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=testing mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/guahanweb/hapi-jwt-plugin.git"
+  },
+  "keywords": [
+    "hapi",
+    "jwt",
+    "authorization",
+    "auth"
+  ],
+  "author": "Garth Henson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guahanweb/hapi-jwt-plugin/issues"
+  },
+  "homepage": "https://github.com/guahanweb/hapi-jwt-plugin#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "sinon": "^2.2.0"
+  }
+}
