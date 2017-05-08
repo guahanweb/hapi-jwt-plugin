@@ -1,1 +1,2 @@
-# hapi-jwt-plugin
+# JWT Plugin for Hapi
+
