@@ -1,5 +1,5 @@
 {
-  "name": "hapi-jwt-plugin",
+  "name": "@guahanweb/hapi-jwt-plugin",
   "version": "0.0.1",
   "description": "Hapi Plugin to enable JWT authorization",
   "main": "index.js",
