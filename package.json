@@ -1,6 +1,6 @@
 {
-  "name": "hapi-jwt-plugin",
-  "version": "1.0.0",
+  "name": "@guahanweb/hapi-jwt-plugin",
+  "version": "0.0.2",
   "description": "Hapi Plugin to enable JWT authorization",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,10 @@
     "authorization",
     "auth"
   ],
-  "author": "Garth Henson",
+  "author": {
+    "name": "Garth Henson",
+    "email": "garth@guahanweb.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/guahanweb/hapi-jwt-plugin/issues"
