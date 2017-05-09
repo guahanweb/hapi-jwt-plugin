@@ -21,6 +21,17 @@ function initializeServer(options) {
                 return reject(err);
             }
 
+            server.route({
+              method: 'GET',
+              path: '/test',
+              config: {
+                auth: 'jwt',
+                handler: function (request, reply) {
+                  reply('ok');
+                }
+              }
+            });
+
             server.start(err => {
                 if (err) {
                     return reject(err);

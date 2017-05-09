@@ -5,6 +5,13 @@ const chai = require('chai');
 const expect = chai.expect;
 
 describe ('JWT object', function () {
+  before(function () {
+    let jwt = new JWT({ secret: 'foobar' });
+    jwt.header = { typ: 'jwt', alg: 'sha256' };
+    jwt.payload = { foo: 'bar' };
+    this.control = jwt;
+  });
+
   it ('.constructor()', function () {
     let secret = 'my secret';
     let jwt = new JWT();
@@ -15,48 +22,49 @@ describe ('JWT object', function () {
   });
 
   it ('.createToken()', function (done) {
-    let jwt = new JWT({ secret: 'foobar' });
-    jwt.header = { typ: 'jwt', alg: 'sha256' };
-    jwt.payload = { foo: 'bar' };
-    jwt.createToken().then(function (token) {
-      console.log('TOKEN:', token);
+    this.control.createToken().then(function (token) {
       done();
     }, function (err) {
       done(err);
     });
   });
 
-  it ('.validate()', function (done) {
-    let jwt = new JWT();
-    let header = {
-      typ: 'jwt',
-      alg: 'sha256'
-    };
-
-    let payload = {
-      foo: 'bar'
-    };
+  it ('.validate() - valid', function (done) {
+    let jwt = new JWT({ secret: 'foobar' });
+    let control = this.control;
 
     // build a control token to test
-    let token = [
-      (new Buffer(JSON.stringify(header))).toString('base64'),
-      (new Buffer(JSON.stringify(payload))).toString('base64'),
-      'asdf'
-    ].join('.');
+    control.createToken().then(token => {
+      // validate with our new JWT object
+      jwt.validate(token).then(function () {
+        // check header parsing
+        expect(jwt.header).to.exist;
+        expect(jwt.header.typ).to.equal(control.header.typ);
+        expect(jwt.header.alg).to.equal(control.header.alg);
 
-    jwt.validate(token).then(function () {
-      // check header parsing
-      expect(jwt.header).to.exist;
-      expect(jwt.header.typ).to.equal(header.typ);
-      expect(jwt.header.alg).to.equal(header.alg);
+        // check body parsing
+        expect(jwt.payload).to.exist;
+        expect(jwt.payload.foo).to.equal(control.payload.foo);
 
-      // check body parsing
-      expect(jwt.payload).to.exist;
-      expect(jwt.payload.foo).to.equal(payload.foo);
+        done();
+      }, done);
+    }, done);
+  });
 
-      done();
-    }, function (err) {
-      done(err);
-    });
+  it ('.validate() - invalid', function (done) {
+    let jwt = new JWT({ secret: 'fizzbuzz' });
+    let control = this.control;
+
+    // build a control token to test
+    control.createToken().then(token => {
+      jwt.validate(token).then(function () {
+        done(new Error('should not validate'));
+      }, function (err) {
+        expect(err).to.exist;
+        expect(err).to.equal('invalid token');
+        done();
+      });
+
+    }, done);
   });
 });
