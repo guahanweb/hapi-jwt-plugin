@@ -1,7 +1,7 @@
 # JWT Plugin for Hapi
 [![Build Status](https://travis-ci.org/guahanweb/hapi-jwt-plugin.svg?branch=master)](https://travis-ci.org/guahanweb/hapi-jwt-plugin)
 
-[JavaScript Web Tokens](https://jwt.io/) provide an RFC compliant way to propogate data through requests.
+[JSON Web Tokens](https://jwt.io/) provide an RFC compliant way to propogate data through requests.
 This plugin leverages Hapi's authorization model and creates a customizable way to validate inbound
 authorization headers using JWT.
 
